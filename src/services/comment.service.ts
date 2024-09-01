@@ -13,7 +13,7 @@ class CommentService {
         }
     }
 
-    public async findById(id: string): Promise<CommentDocument | null> {
+    public async get(id: string): Promise<CommentDocument | null> {
         try {
             const comment = await CommentModel.findById(id);
             if (!comment) {

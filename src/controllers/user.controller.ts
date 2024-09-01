@@ -37,7 +37,7 @@ class userController {
 
     public async get (req: Request, res: Response) {
         try {
-            const user: UserDocument | null = await userService.findById(req.params.id); 
+            const user: UserDocument | null = await userService.get(req.params.id); 
             res.json(user);   
         } catch (error) {
             if (error instanceof UserDoesNotExistsError){

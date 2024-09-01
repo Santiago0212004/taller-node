@@ -62,7 +62,7 @@ class UserService {
         }
     }    
 
-    public async findById(id: string): Promise<UserDocument | null > {
+    public async get(id: string): Promise<UserDocument | null > {
         try {
             const user: UserDocument | null = await UserModel.findById(id);
             if(!user)

@@ -16,11 +16,7 @@ class CommentController {
 
     public async get(req: Request, res: Response) {
         try {
-            const comment: CommentDocument | null = await commentService.findById(req.params.commentId);
-            if (!comment) {
-                res.status(404).json({ message: "Comment does not exist" });
-                return;
-            }
+            const comment: CommentDocument | null = await commentService.get(req.params.commentId);
             res.json(comment);
         } catch (error) {
             if (error instanceof CommentDoesNotExistError) {
