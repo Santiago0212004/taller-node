@@ -16,6 +16,9 @@ class CommentService {
     public async findById(id: string): Promise<CommentDocument | null> {
         try {
             const comment = await CommentModel.findById(id);
+            if (!comment) {
+                throw new CommentDoesNotExistError("Comment does not exist");
+            }
             return comment;
         } catch (error) {
             throw error;
@@ -33,7 +36,7 @@ class CommentService {
 
     public async update(id: string, commentInput: CommentInput): Promise<CommentDocument | null> {
         try {
-            const comment: CommentDocument | null = await this.findById(id);
+            const comment: CommentDocument | null = await CommentModel.findById(id);
             if (!comment) {
                 throw new CommentDoesNotExistError("Comment does not exist");
             }
@@ -46,7 +49,7 @@ class CommentService {
 
     public async delete(id: string): Promise<CommentDocument | null> {
         try {
-            const comment: CommentDocument | null = await this.findById(id);
+            const comment: CommentDocument | null = await CommentModel.findById(id);
             if (!comment) {
                 throw new CommentDoesNotExistError("Comment does not exist");
             }

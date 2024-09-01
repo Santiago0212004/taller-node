@@ -64,7 +64,9 @@ class UserService {
 
     public async findById(id: string): Promise<UserDocument | null > {
         try {
-            const user = await  UserModel.findById(id);
+            const user: UserDocument | null = await UserModel.findById(id);
+            if(!user)
+                throw new UserDoesNotExistsError("User does not exists");
             return user;
         } catch (error) {
            throw error; 
@@ -73,7 +75,7 @@ class UserService {
 
     public async update(id: string, userInput: UserInput): Promise<UserDocument | null> {
         try {
-            const user: UserDocument | null = await this.findById(id);
+            const user: UserDocument | null = await UserModel.findById(id);
             if(!user)
                 throw new UserDoesNotExistsError("User does not exists");
             await UserModel.findOneAndUpdate({_id: id}, userInput, {returnOriginal: false});
@@ -85,7 +87,7 @@ class UserService {
 
     public async delete(id: string): Promise<UserDocument | null> {
         try {
-            const user: UserDocument | null = await this.findById(id);
+            const user: UserDocument | null = await UserModel.findById(id);
             if(!user)
                 throw new UserDoesNotExistsError("User does not exists"); 
             await UserModel.findByIdAndDelete(id);
