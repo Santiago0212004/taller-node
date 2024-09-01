@@ -5,6 +5,8 @@ import { db } from './config/db';
 
 dotenv.config();
 import { router as user } from './routes/user.routes';
+import { router as comment } from './routes/comment.routes';
+
 
 const app: Express = express();
 
@@ -18,6 +20,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/api/users', user);
+app.use('/api/comments', comment);
+
 
 db.then(() => {
     app.listen(port, () => {
