@@ -8,7 +8,8 @@ class CommentController {
 
     public async create(req: Request, res: Response) {
         try {
-            const comment: CommentDocument = await commentService.create(req.body as CommentInput);
+            req.body.userId = req.params.id;
+            const comment: CommentDocument = await commentService.create((req.body as CommentInput));
             res.status(201).json(comment);
         } catch (error) {
             res.status(500).json(error);
@@ -83,7 +84,8 @@ class CommentController {
     public async reply(req: Request, res: Response) {
         try {
             const parentId = req.params.commentId;
-            const comment: CommentDocument = await commentService.create({ ...req.body, parentId } as CommentInput);
+            const userId_:any = req.params.id;
+            const comment: CommentDocument = await commentService.create(({ ...req.body, parentId } as CommentInput).userId = userId_);
             res.status(201).json(comment);
         } catch (error) {
             res.status(500).json(error);

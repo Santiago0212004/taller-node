@@ -5,6 +5,7 @@ import UserModel, {UserDocument, UserInput}  from "../models/user.model";
 import UserExistsError from "../exceptions/UserExistsError";
 import UserDoesNotExistsError from "../exceptions/UserDoesNotExistsError";
 
+export let actualUser = "";
 class UserService {
     public async create(userInput: UserInput): Promise<UserDocument> {
         try {
@@ -32,6 +33,8 @@ class UserService {
             if(!isMatch)
                 throw  new ReferenceError("Not authorized");
             
+            actualUser = userExists.id;
+
             return { 
                 email: userExists.email, 
                 id: userExists._id , 
