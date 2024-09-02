@@ -6,6 +6,7 @@ import { db } from './config/db';
 dotenv.config();
 import { router as user } from './routes/user.routes';
 import { router as comment } from './routes/comment.routes';
+import { router as reaction } from './routes/reaction.routes';
 
 
 const app: Express = express();
@@ -21,6 +22,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/users', user);
 app.use('/api/comments', comment);
+app.use('/api/reaction', reaction)
 
 
 db.then(() => {
