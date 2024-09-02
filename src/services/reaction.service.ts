@@ -1,6 +1,11 @@
 import { ReactionDocument, ReactionInput } from "../models/reaction.model";
 import ReactionModel from "../models/reaction.model";
 import ReactionDoesNotExistError from "../exceptions/ReactionDoesNotExistError";
+import UserModel, {UserDocument, UserInput}  from "../models/user.model";
+import UserDoesNotExistsError from "../exceptions/UserDoesNotExistsError";
+import NotYourComment from "../exceptions/NotYourComment";
+
+
 
 class ReactionService {
 
@@ -34,14 +39,21 @@ class ReactionService {
         }
     }
 
-    public async delete(id: string): Promise<ReactionDocument | null> {
+    public async delete(id: string, userId: string): Promise<ReactionDocument | null> {
         try {
-            const comment: ReactionDocument | null = await ReactionModel.findById(id);
-            if (!comment) {
+            const reaction: ReactionDocument | null = await ReactionModel.findById(id);
+            const user: UserDocument | null = await UserModel.findById(userId);
+            if (!reaction) {
                 throw new ReactionDoesNotExistError("Reaction does not exist");
             }
+            if (!user) {
+                throw new UserDoesNotExistsError("User does not exist");
+            }
+            if (user.id!=reaction.userId) {
+                throw new NotYourComment("Reaction is not yours");
+            }
             await ReactionModel.findByIdAndDelete(id);
-            return comment;
+            return reaction;
         } catch (error) {
             throw error;
         }
