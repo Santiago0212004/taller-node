@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { CommentDocument, CommentInput } from "../models/comment.model";
 import commentService from "../services/comment.service";
 import CommentDoesNotExistError from "../exceptions/CommentDoesNotExistError";
+import NotYourComment from "../exceptions/NotYourComment";
 
 class CommentController {
 
@@ -38,7 +39,7 @@ class CommentController {
 
     public async update(req: Request, res: Response) {
         try {
-            const comment: CommentDocument | null = await commentService.update(req.params.commentId, req.body as CommentInput);
+            const comment: CommentDocument | null = await commentService.update(req.params.commentId,req.params.id, req.body as CommentInput);
             if (!comment) {
                 res.status(404).json({ message: "Comment does not exist" });
                 return;
@@ -47,6 +48,10 @@ class CommentController {
         } catch (error) {
             if (error instanceof CommentDoesNotExistError) {
                 res.status(400).json({ message: "Comment does not exist" });
+                return;
+            }
+            if (error instanceof NotYourComment) {
+                res.status(400).json({ message: "Comment is not yours" });
                 return;
             }
             res.status(500).json(error);
@@ -56,7 +61,7 @@ class CommentController {
     public async delete(req: Request, res: Response) {
         try {
             const commentId = req.params.commentId;
-            const comment: CommentDocument | null = await commentService.delete(commentId);
+            const comment: CommentDocument | null = await commentService.delete(commentId,req.params.id);
             if (!comment) {
                 res.status(404).json({ message: "Comment does not exist" });
                 return;
@@ -65,6 +70,10 @@ class CommentController {
         } catch (error) {
             if (error instanceof CommentDoesNotExistError) {
                 res.status(400).json({ message: "Comment does not exist" });
+                return;
+            }
+            if (error instanceof NotYourComment) {
+                res.status(400).json({ message: "Comment is not yours" });
                 return;
             }
             res.status(500).json(error);
