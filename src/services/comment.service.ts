@@ -1,6 +1,9 @@
 import { CommentDocument, CommentInput } from "../models/comment.model";
+import UserModel, {UserDocument, UserInput}  from "../models/user.model";
 import CommentModel from "../models/comment.model";
 import CommentDoesNotExistError from "../exceptions/CommentDoesNotExistError";
+import UserDoesNotExistsError from "../exceptions/UserDoesNotExistsError";
+import NotYourComment from "../exceptions/NotYourComment";
 
 class CommentService {
 
@@ -34,11 +37,18 @@ class CommentService {
         }
     }
 
-    public async update(id: string, commentInput: CommentInput): Promise<CommentDocument | null> {
+    public async update(id: string, userId: String, commentInput: CommentInput): Promise<CommentDocument | null> {
         try {
             const comment: CommentDocument | null = await CommentModel.findById(id);
+            const user: UserDocument | null = await UserModel.findById(userId);
             if (!comment) {
                 throw new CommentDoesNotExistError("Comment does not exist");
+            }
+            if (!user) {
+                throw new UserDoesNotExistsError("User does not exist");
+            }
+            if (user.id!=comment.userId && user.role!="superuser") {
+                throw new NotYourComment("Comment is not yours");
             }
             await CommentModel.findOneAndUpdate({ _id: id }, commentInput, { returnOriginal: false });
             return comment;
@@ -47,11 +57,18 @@ class CommentService {
         }
     }
 
-    public async delete(id: string): Promise<CommentDocument | null> {
+    public async delete(id: string, userId: String): Promise<CommentDocument | null> {
         try {
             const comment: CommentDocument | null = await CommentModel.findById(id);
+            const user: UserDocument | null = await UserModel.findById(userId);
             if (!comment) {
                 throw new CommentDoesNotExistError("Comment does not exist");
+            }
+            if (!user) {
+                throw new UserDoesNotExistsError("User does not exist");
+            }
+            if (user.id!=comment.userId && user.role!="superuser") {
+                throw new NotYourComment("Comment is not yours");
             }
             await CommentModel.findByIdAndDelete(id);
             return comment;
