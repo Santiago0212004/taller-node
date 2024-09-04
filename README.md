@@ -1,4 +1,10 @@
-# Taller Node Guia
+#Integrantes
+
+- Santiago Barraza
+- Sebastián López
+- Sebastián Paz
+
+# Taller Node Guia - Computación en Internet III
 
 ## Configuración del proyecto
 
