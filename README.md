@@ -1,5 +1,41 @@
 # Taller Node Guia
-Estos son cada uno de los servicios disponibles para esta API Rest. Todas las solicitudes a realizar se harán a través de este enlace ["https://https://taller-node.vercel.app/"](https://https://taller-node.vercel.app/)
+
+## Configuración del proyecto
+
+### En local
+
+1. Estando en la carpeta del proybecto se ejecuta el comando ```yarn install```. Esto instalará las siguientes librerías:
+
+  ![image](https://github.com/user-attachments/assets/61d6a754-1c8c-4361-9c15-4bde5c6f7402)
+
+  Y creará los siguientes scripts:
+
+  ![image](https://github.com/user-attachments/assets/f585d659-d1cb-497b-be08-9117c1984a95)
+
+
+2. Luego, si se ejecuta ```yarn start``` ejecutará en local el proyecto en un ambiente de desarrollo.
+   
+3. Para realizar únicamente build, se deberá ejecutar ```yarn build```, el cual borrará la carpeta "dist" (la carpeta donde queda el build con el código transformado de TypeScript a JavaScript) y luego generará un nuevo build usando "tsc".
+
+### Despliegue en vercel
+
+1. Se definió el siguiente archivo vercel.json:
+
+  ![image](https://github.com/user-attachments/assets/65a4f3ee-949d-40eb-a77a-28adcc5659fb)
+
+  Con esa información, vercel reconocerá los archivos con código de JavasCript dentro de la carpeta "dist" (después del build), usando @vercel/node para realizar el build en la nube.
+
+2. Como vercel reconoce código JavasCript para el despliegue y no TypeScript, entonces, es por ese motivo que se usa la carpeta "dist" como objetivo, ya que en esta se encuentra el codigo de JavaScript. Para asegurarnos que se haga build antes de cada commit para que el código del build esté actualizado con los cambios realizado en TypeScript, se añadió la librería pre-commit, con las siguientes instrucciones:
+   
+   ![image](https://github.com/user-attachments/assets/64a63c5e-2b40-4a75-9686-d339e3951ca8)
+
+   Ejecuntado los scripts que se encargan de probar el funcionamiento del codigo, realizar el build y añadir el build a git antes de realizar el commit.
+   
+3. Por útlimo, se realizó el despliegue en vercel, asociando un proyecto de vercel al repositorio de github, además añadiendo la ```MONGO_URL``` a las variables de entorno de vercel, para que el proyecto desplegado sea capaz de reconocer la base de datos tal como lo hace el local haciendo uso del ".env".
+
+## Endpoints
+
+Estos son cada uno de los servicios disponibles para esta API Rest. Todas las solicitudes a realizar se harán a través de este enlace ["https://taller-node.vercel.app/"](https://taller-node.vercel.app/)
 junto con el tipo de servicio a realizar y la información requerida.
 ### Usuarios
 #### - Login:
