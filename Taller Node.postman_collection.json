@@ -1,0 +1,3328 @@
+{
+	"info": {
+		"_postman_id": "971e701a-e023-4336-bae4-b024e0633a67",
+		"name": "Taller Node",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26108381",
+		"_collection_link": "https://compunet-iii.postman.co/workspace/Compunet-III-Workspace~96cb9986-568c-40ed-9bf3-7313d381cdec/collection/26108381-971e701a-e023-4336-bae4-b024e0633a67?action=share&source=collection_link&creator=26108381"
+	},
+	"item": [
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "CreateComment",
+					"item": [
+						{
+							"name": "CreateComment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Obtener el cuerpo de la solicitud como un objeto JSON\r",
+											"let requestData = pm.request.body.raw;\r",
+											"\r",
+											"// Convertir el cuerpo de la solicitud de texto a un objeto JSON\r",
+											"let jsonData = JSON.parse(requestData);\r",
+											"\r",
+											"// Obtener el userId desde la variable de entorno\r",
+											"let storedUserId = pm.environment.get(\"userId\");\r",
+											"\r",
+											"// Reemplazar el userId en el cuerpo de la solicitud\r",
+											"jsonData.userId = storedUserId;\r",
+											"\r",
+											"// Convertir el objeto JSON de vuelta a una cadena de texto\r",
+											"pm.request.body.raw = JSON.stringify(jsonData);\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Obtener la respuesta como JSON\r",
+											"const response = pm.response.json();\r",
+											"// Guardar el token en una variable de entorno\r",
+											"pm.environment.set(\"commentId\", response._id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhZmVmYjYzY2ZmYTRiNzY3ZDc3OCIsImVtYWlsIjoidXNlcjFAZW1haWwuY29tIiwibmFtZSI6InVzZXIxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjM3NzcsImV4cCI6MTcyNTQyMzg5N30.WlCK9bQk6WDdwYPSEE9vP24OAmiNd1cccvjeYzm9-I4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content\": \"This is a sample comment.\",\r\n  \"parentId\": null,\r\n  \"createdAt\": \"2024-09-01T12:00:00Z\", \r\n  \"updatedAt\": \"2024-09-01T12:00:00Z\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/create",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										"create"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "CreateComment",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"content\": \"This is a sample comment.\",\r\n  \"parentId\": null,\r\n  \"createdAt\": \"2024-09-01T12:00:00Z\", \r\n  \"updatedAt\": \"2024-09-01T12:00:00Z\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/create",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												"create"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "210"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:23:11 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"d2-ZEc/B9KU5YnHToYTUSYphoj53jk\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::lk2jz-1725423791880-b7226ce610bd"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"userId\": \"66d3afefb63cffa4b767d778\",\n    \"content\": \"This is a sample comment.\",\n    \"parentId\": null,\n    \"_id\": \"66d7e0afc6203e9aa66c1268\",\n    \"createdAt\": \"2024-09-01T12:00:00.000Z\",\n    \"updatedAt\": \"2024-09-01T12:00:00.000Z\",\n    \"__v\": 0\n}"
+								}
+							]
+						},
+						{
+							"name": "CreateComment Unauthorized",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Obtener el cuerpo de la solicitud como un objeto JSON\r",
+											"let requestData = pm.request.body.raw;\r",
+											"\r",
+											"// Convertir el cuerpo de la solicitud de texto a un objeto JSON\r",
+											"let jsonData = JSON.parse(requestData);\r",
+											"\r",
+											"// Obtener el userId desde la variable de entorno\r",
+											"let storedUserId = pm.environment.get(\"userId\");\r",
+											"\r",
+											"// Reemplazar el userId en el cuerpo de la solicitud\r",
+											"jsonData.userId = storedUserId;\r",
+											"\r",
+											"// Convertir el objeto JSON de vuelta a una cadena de texto\r",
+											"pm.request.body.raw = JSON.stringify(jsonData);\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Obtener la respuesta como JSON\r",
+											"const response = pm.response.json();\r",
+											"// Guardar el token en una variable de entorno\r",
+											"pm.environment.set(\"commentId\", response._id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content\": \"This is a sample comment.\",\r\n  \"parentId\": null,\r\n  \"createdAt\": \"2024-09-01T12:00:00Z\", \r\n  \"updatedAt\": \"2024-09-01T12:00:00Z\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/create",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										"create"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "CreateComment Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"content\": \"This is a sample comment.\",\r\n  \"parentId\": null,\r\n  \"createdAt\": \"2024-09-01T12:00:00Z\", \r\n  \"updatedAt\": \"2024-09-01T12:00:00Z\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/create",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												"create"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "26"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:23:18 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::mk594-1725423798092-b93b999ad15c"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthorized\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "AllComments",
+					"item": [
+						{
+							"name": "AllComments",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhZmVmYjYzY2ZmYTRiNzY3ZDc3OCIsImVtYWlsIjoidXNlcjFAZW1haWwuY29tIiwibmFtZSI6InVzZXIxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjM3NzcsImV4cCI6MTcyNTQyMzg5N30.WlCK9bQk6WDdwYPSEE9vP24OAmiNd1cccvjeYzm9-I4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "AllComments",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:23:26 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"603-l+f/0F5u8DPffVSN21NhcAN/RmA\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "BYPASS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::77kd4-1725423806611-e3c607dad9d6"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"_id\": \"66d49ca42b18eb5d45072f7b\",\n        \"userId\": \"66d3afefb63cffa4b767d778\",\n        \"content\": \"This is a sample comment. UPDATED\",\n        \"parentId\": null,\n        \"createdAt\": \"2024-09-01T12:00:00.000Z\",\n        \"updatedAt\": \"2024-09-04T03:58:17.260Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d5d053c8810b9237b76d15\",\n        \"userId\": \"66d3afefb63cffa4b767d778\",\n        \"content\": \"This is a sample comment.\",\n        \"parentId\": null,\n        \"createdAt\": \"2024-09-01T12:00:00.000Z\",\n        \"updatedAt\": \"2024-09-01T12:00:00.000Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d622c3b635d5355aec3730\",\n        \"userId\": \"66d3afefb63cffa4b767d778\",\n        \"content\": \"This is a sample comment.\",\n        \"parentId\": null,\n        \"createdAt\": \"2024-09-01T12:00:00.000Z\",\n        \"updatedAt\": \"2024-09-01T12:00:00.000Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d7cc72b027269e9cb8b8e8\",\n        \"userId\": \"66d3a663ab3e0f331294bd87\",\n        \"content\": \"new comment\",\n        \"parentId\": \"66d49ca42b18eb5d45072f7b\",\n        \"createdAt\": \"2024-09-04T02:56:50.366Z\",\n        \"updatedAt\": \"2024-09-04T02:56:50.366Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d7da0d8443f4f44f5d2a62\",\n        \"userId\": \"66d3afefb63cffa4b767d778\",\n        \"content\": \"This is a sample comment.\",\n        \"parentId\": null,\n        \"createdAt\": \"2024-09-01T12:00:00.000Z\",\n        \"updatedAt\": \"2024-09-01T12:00:00.000Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d7db4f8443f4f44f5d2a6e\",\n        \"userId\": \"66d3afefb63cffa4b767d778\",\n        \"content\": \"Another This is a reply to the original comment.\",\n        \"parentId\": \"66d49ca42b18eb5d45072f7b\",\n        \"createdAt\": \"2024-09-04T04:00:15.088Z\",\n        \"updatedAt\": \"2024-09-04T04:00:15.088Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d7e0afc6203e9aa66c1268\",\n        \"userId\": \"66d3afefb63cffa4b767d778\",\n        \"content\": \"This is a sample comment.\",\n        \"parentId\": null,\n        \"createdAt\": \"2024-09-01T12:00:00.000Z\",\n        \"updatedAt\": \"2024-09-01T12:00:00.000Z\",\n        \"__v\": 0\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "AllComments Unauthorized",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "AllComments Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												""
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Age",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "26"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:23:45 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::85zjv-1725423824989-141613e7876e"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthorized\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "GetComments",
+					"item": [
+						{
+							"name": "GetComment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhZmVmYjYzY2ZmYTRiNzY3ZDc3OCIsImVtYWlsIjoidXNlcjFAZW1haWwuY29tIiwibmFtZSI6InVzZXIxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjM3NzcsImV4cCI6MTcyNTQyMzg5N30.WlCK9bQk6WDdwYPSEE9vP24OAmiNd1cccvjeYzm9-I4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/get/66d49ca42b18eb5d45072f7b",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										"get",
+										"66d49ca42b18eb5d45072f7b"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetComment",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/get/66d49ca42b18eb5d45072f7b",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												"get",
+												"66d49ca42b18eb5d45072f7b"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "218"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:23:56 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"da-ohOJXPXXgFwoxe6yAEZKpsEb6bM\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "BYPASS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::l86wm-1725423836120-88a589888720"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"_id\": \"66d49ca42b18eb5d45072f7b\",\n    \"userId\": \"66d3afefb63cffa4b767d778\",\n    \"content\": \"This is a sample comment. UPDATED\",\n    \"parentId\": null,\n    \"createdAt\": \"2024-09-01T12:00:00.000Z\",\n    \"updatedAt\": \"2024-09-04T03:58:17.260Z\",\n    \"__v\": 0\n}"
+								}
+							]
+						},
+						{
+							"name": "GetComment Unauthorized",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/get/66d49ca42b18eb5d45072f7b",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										"get",
+										"66d49ca42b18eb5d45072f7b"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetComment Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/get/66d49ca42b18eb5d45072f7b",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												"get",
+												"66d49ca42b18eb5d45072f7b"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Age",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "26"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:24:19 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::m8tsh-1725423859931-06b8497ea09f"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthorized\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "UpdateComment",
+					"item": [
+						{
+							"name": "UpdateComment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhZmVmYjYzY2ZmYTRiNzY3ZDc3OCIsImVtYWlsIjoidXNlcjFAZW1haWwuY29tIiwibmFtZSI6InVzZXIxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjM3NzcsImV4cCI6MTcyNTQyMzg5N30.WlCK9bQk6WDdwYPSEE9vP24OAmiNd1cccvjeYzm9-I4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userId\": \"66d3afefb63cffa4b767d778\",\r\n  \"content\": \"This is a sample comment. UPDATED\",\r\n  \"parentId\": null,\r\n  \"createdAt\": \"2024-09-01T12:00:00Z\", \r\n  \"updatedAt\": \"2024-09-01T12:00:00Z\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/update/66d49ca42b18eb5d45072f7b",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										"update",
+										"66d49ca42b18eb5d45072f7b"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "UpdateComment",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"userId\": \"66d3afefb63cffa4b767d778\",\r\n  \"content\": \"This is a sample comment. UPDATED\",\r\n  \"parentId\": null,\r\n  \"createdAt\": \"2024-09-01T12:00:00Z\", \r\n  \"updatedAt\": \"2024-09-01T12:00:00Z\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/update/66d49ca42b18eb5d45072f7b",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												"update",
+												"66d49ca42b18eb5d45072f7b"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "218"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:24:32 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"da-ohOJXPXXgFwoxe6yAEZKpsEb6bM\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::5pzvf-1725423872437-6fbcd9c55c82"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"_id\": \"66d49ca42b18eb5d45072f7b\",\n    \"userId\": \"66d3afefb63cffa4b767d778\",\n    \"content\": \"This is a sample comment. UPDATED\",\n    \"parentId\": null,\n    \"createdAt\": \"2024-09-01T12:00:00.000Z\",\n    \"updatedAt\": \"2024-09-04T03:58:17.260Z\",\n    \"__v\": 0\n}"
+								}
+							]
+						},
+						{
+							"name": "UpdateComment Unauthorized",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userId\": \"66d3afefb63cffa4b767d778\",\r\n  \"content\": \"This is a sample comment. UPDATED\",\r\n  \"parentId\": null,\r\n  \"createdAt\": \"2024-09-01T12:00:00Z\", \r\n  \"updatedAt\": \"2024-09-01T12:00:00Z\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/update/66d49ca42b18eb5d45072f7b",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										"update",
+										"66d49ca42b18eb5d45072f7b"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "UpdateComment Unauthorized",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"userId\": \"66d3afefb63cffa4b767d778\",\r\n  \"content\": \"This is a sample comment. UPDATED\",\r\n  \"parentId\": null,\r\n  \"createdAt\": \"2024-09-01T12:00:00Z\", \r\n  \"updatedAt\": \"2024-09-01T12:00:00Z\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/update/66d49ca42b18eb5d45072f7b",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												"update",
+												"66d49ca42b18eb5d45072f7b"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "26"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:24:37 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::5pzvf-1725423877443-014bedccab71"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthorized\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "DeleteComment",
+					"item": [
+						{
+							"name": "DeleteComment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhZmVmYjYzY2ZmYTRiNzY3ZDc3OCIsImVtYWlsIjoidXNlcjFAZW1haWwuY29tIiwibmFtZSI6InVzZXIxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjM3NzcsImV4cCI6MTcyNTQyMzg5N30.WlCK9bQk6WDdwYPSEE9vP24OAmiNd1cccvjeYzm9-I4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/delete/66d7da0d8443f4f44f5d2a62",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										"delete",
+										"66d7da0d8443f4f44f5d2a62"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DeleteComment",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/delete/66d7da0d8443f4f44f5d2a62",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												"delete",
+												"66d7da0d8443f4f44f5d2a62"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "210"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:24:56 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"d2-UWJPdoCJSVxtphtwU8qUJA2jE5E\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::4xhgz-1725423896705-f1a800de99f3"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"_id\": \"66d7da0d8443f4f44f5d2a62\",\n    \"userId\": \"66d3afefb63cffa4b767d778\",\n    \"content\": \"This is a sample comment.\",\n    \"parentId\": null,\n    \"createdAt\": \"2024-09-01T12:00:00.000Z\",\n    \"updatedAt\": \"2024-09-01T12:00:00.000Z\",\n    \"__v\": 0\n}"
+								}
+							]
+						},
+						{
+							"name": "DeleteComment Unauthorized",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/delete/66d7da0d8443f4f44f5d2a62",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										"delete",
+										"66d7da0d8443f4f44f5d2a62"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DeleteComment Unauthorized",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/delete/66d7da0d8443f4f44f5d2a62",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												"delete",
+												"66d7da0d8443f4f44f5d2a62"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "26"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:25:05 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::725gb-1725423905423-85117bb75948"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthorized\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "ReplyComment",
+					"item": [
+						{
+							"name": "ReplyComment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhZmVmYjYzY2ZmYTRiNzY3ZDc3OCIsImVtYWlsIjoidXNlcjFAZW1haWwuY29tIiwibmFtZSI6InVzZXIxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjM5MzgsImV4cCI6MTcyNTQyNDA1OH0.w2s3c1AAtJmKcbe0uiQxYXRAl_fWDs3_CpK3w9NlVV8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": \"66d3afefb63cffa4b767d778\",\r\n    \"content\": \"Another This is a reply to the original comment.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/66d49ca42b18eb5d45072f7b/reply",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										"66d49ca42b18eb5d45072f7b",
+										"reply"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "ReplyComment",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"66d3afefb63cffa4b767d778\",\r\n    \"content\": \"Another This is a reply to the original comment.\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/66d49ca42b18eb5d45072f7b/reply",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												"66d49ca42b18eb5d45072f7b",
+												"reply"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "255"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:26:01 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"ff-V1s89HpQRhMYpm7paueT1Yb52YY\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::9547l-1725423961868-91bb464f07e1"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"userId\": \"66d3afefb63cffa4b767d778\",\n    \"content\": \"Another This is a reply to the original comment.\",\n    \"parentId\": \"66d49ca42b18eb5d45072f7b\",\n    \"_id\": \"66d7e159c6203e9aa66c1273\",\n    \"createdAt\": \"2024-09-04T04:26:01.896Z\",\n    \"updatedAt\": \"2024-09-04T04:26:01.896Z\",\n    \"__v\": 0\n}"
+								}
+							]
+						},
+						{
+							"name": "ReplyComment Unauthorized",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": \"66d3afefb63cffa4b767d778\",\r\n    \"content\": \"Another This is a reply to the original comment.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/comments/66d49ca42b18eb5d45072f7b/reply",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"comments",
+										"66d49ca42b18eb5d45072f7b",
+										"reply"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "ReplyComment Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"66d3afefb63cffa4b767d778\",\r\n    \"content\": \"Another This is a reply to the original comment.\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/comments/66d49ca42b18eb5d45072f7b/reply",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"comments",
+												"66d49ca42b18eb5d45072f7b",
+												"reply"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "26"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:26:11 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::gjx8k-1725423971800-72d012d41f5f"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthorized\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "Login User",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Obtener la respuesta como JSON\r",
+											"const response = pm.response.json();\r",
+											"// Guardar el token en una variable de entorno\r",
+											"pm.environment.set(\"authToken\", response.token);\r",
+											"pm.environment.set(\"userId\", response.id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"user2@email.com\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/users/login",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Login User",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"user1@email.com\",\r\n    \"password\": \"password\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/users/login",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"users",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "314"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:21:34 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"13a-x2tSTASEU4rikdqnzwXQUAD4w4M\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::r288k-1725423694650-a5cddcac5288"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"email\": \"user1@email.com\",\n    \"id\": \"66d3afefb63cffa4b767d778\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhZmVmYjYzY2ZmYTRiNzY3ZDc3OCIsImVtYWlsIjoidXNlcjFAZW1haWwuY29tIiwibmFtZSI6InVzZXIxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjM2OTQsImV4cCI6MTcyNTQyMzgxNH0.ElmxK7OCfJrw1yLkjD-MP0W-JDC_jypfjZFr1hHJ5Ec\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Login SuperUser",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Obtener la respuesta como JSON\r",
+											"const response = pm.response.json();\r",
+											"// Guardar el token en una variable de entorno\r",
+											"pm.environment.set(\"authToken\", response.token);\r",
+											"pm.environment.set(\"userId\", response.id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"superuser@email.com\",\r\n    \"password\": \"superuser\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/api/users/login",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Login SuperUser",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"superuser@email.com\",\r\n    \"password\": \"superuser\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/api/users/login",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"api",
+												"users",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "335"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:26:28 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"14f-YFa+S5UsXrv/exNjWqm7SoE4dyA\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::5jzsh-1725423988179-6fdbc2ca0c5b"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"email\": \"superuser@email.com\",\n    \"id\": \"66d3a663ab3e0f331294bd87\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhNjYzYWIzZTBmMzMxMjk0YmQ4NyIsImVtYWlsIjoic3VwZXJ1c2VyQGVtYWlsLmNvbSIsIm5hbWUiOiJTdXBlclVzZXIiLCJyb2xlIjoic3VwZXJ1c2VyIiwiaWF0IjoxNzI1NDIzOTg4LCJleHAiOjE3MjU0MjQxMDh9.yjbiCzi1S1hk1E8wdjg2bg4qyPZdz4h9zBcMbdHmMyQ\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Login IncorrectPassword",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"user4@email.com\",\r\n    \"password\": \"passasasword\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/api/users/login",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Login IncorrectPassword",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"user4@email.com\",\r\n    \"password\": \"passasasword\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/api/users/login",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"api",
+												"users",
+												"login"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "34"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:26:37 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"22-4vYGM+7C4XBwH1RMVso2JjZadp0\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::rjh8v-1725423997261-539b7d312182"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"User does not exists\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Login NoExistUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"notexistUser@email.com\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/api/users/login",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Login NoExistUser",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"notexistUser@email.com\",\r\n    \"password\": \"password\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/api/users/login",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"api",
+												"users",
+												"login"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "34"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:26:48 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"22-4vYGM+7C4XBwH1RMVso2JjZadp0\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::8xm6g-1725424008753-0e67f0a84d3f"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"User does not exists\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "AllUsers",
+					"item": [
+						{
+							"name": "AllUsers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhNjYzYWIzZTBmMzMxMjk0YmQ4NyIsImVtYWlsIjoic3VwZXJ1c2VyQGVtYWlsLmNvbSIsIm5hbWUiOiJTdXBlclVzZXIiLCJyb2xlIjoic3VwZXJ1c2VyIiwiaWF0IjoxNzI1NDI0MTQ1LCJleHAiOjE3MjU0MjQyNjV9.oDNuGpjCS8sf4S60QogFi5N-O-Ey0nGdVmrPX1-cVhs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/users/",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"users",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "AllUsers",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/users/",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"users",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:26:57 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"438-mPyLqI85UIbY6FLRRjvk1CPpCOs\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "BYPASS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::srb8n-1725424017931-377a6aeb3635"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"_id\": \"66d3a663ab3e0f331294bd87\",\n        \"name\": \"SuperUser\",\n        \"email\": \"superuser@email.com\",\n        \"password\": \"$2b$10$KTZ.u30AP.S5iK1InZMnU.YvxqhxwkkX0W/zgPixsN1VI2cZSF6fq\",\n        \"role\": \"superuser\",\n        \"isActive\": true,\n        \"createdAt\": \"2024-08-31T23:25:23.492Z\",\n        \"updatedAt\": \"2024-08-31T23:25:23.492Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d3afefb63cffa4b767d778\",\n        \"name\": \"user1\",\n        \"email\": \"user1@email.com\",\n        \"password\": \"$2b$10$zctrNk25eBbXODFhfTNIge/8GYtbHlHcyZ5RTZEx6j3RpFzQYtmOe\",\n        \"role\": \"user\",\n        \"isActive\": true,\n        \"createdAt\": \"2024-09-01T00:06:07.306Z\",\n        \"updatedAt\": \"2024-09-01T00:06:07.306Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d3c3f058ddfc413ad82a50\",\n        \"name\": \"user2\",\n        \"email\": \"user2@email.com\",\n        \"password\": \"$2b$10$q1lM0qpdwsFG85qdi5dFTO36j58bIQ/Ia4t7hulBfxVf6UYFYNbRy\",\n        \"role\": \"user\",\n        \"isActive\": true,\n        \"createdAt\": \"2024-09-01T01:31:28.468Z\",\n        \"updatedAt\": \"2024-09-01T01:31:28.468Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d7d81d8443f4f44f5d2a5e\",\n        \"name\": \"user10\",\n        \"email\": \"user10@email.com\",\n        \"password\": \"$2b$10$d6RW0CQN.QFnMhqbzfBuyewyeV/S/H76GKF0xgN2jsdP/7r6mrN1e\",\n        \"role\": \"user\",\n        \"isActive\": true,\n        \"createdAt\": \"2024-09-04T03:46:37.696Z\",\n        \"updatedAt\": \"2024-09-04T03:46:37.696Z\",\n        \"__v\": 0\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "AllUsers Unauthorized",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/api/users/",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "AllUsers Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/api/users/",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"api",
+												"users",
+												""
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Age",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "26"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:27:06 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::hw9wt-1725424026217-39150a0951d6"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthorized\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "CreateUser",
+					"item": [
+						{
+							"name": "CreateUser",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhNjYzYWIzZTBmMzMxMjk0YmQ4NyIsImVtYWlsIjoic3VwZXJ1c2VyQGVtYWlsLmNvbSIsIm5hbWUiOiJTdXBlclVzZXIiLCJyb2xlIjoic3VwZXJ1c2VyIiwiaWF0IjoxNzI1NDIzOTg4LCJleHAiOjE3MjU0MjQxMDh9.yjbiCzi1S1hk1E8wdjg2bg4qyPZdz4h9zBcMbdHmMyQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"user10\",\r\n    \"email\":\"user10@email.com\",\r\n    \"password\":\"password\",\r\n    \"role\":\"user\",\r\n    \"isActive\":true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/users/create",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"users",
+										"create"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "CreateUser",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"user10\",\r\n    \"email\":\"user10@email.com\",\r\n    \"password\":\"password\",\r\n    \"role\":\"user\",\r\n    \"isActive\":true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/users/create",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"users",
+												"create"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "33"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:27:31 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"21-iGErLku/9taeeOQN+9qwFgLXnuo\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::gdvxc-1725424051240-5ee65358315a"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"User already exists\"\n}"
+								}
+							]
+						},
+						{
+							"name": "CreateUser Unauthorized",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhZmVmYjYzY2ZmYTRiNzY3ZDc3OCIsImVtYWlsIjoidXNlcjFAZW1haWwuY29tIiwibmFtZSI6InVzZXIxIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjQwNjYsImV4cCI6MTcyNTQyNDE4Nn0.0WdMaOQEgsaKxVDdnGmtxW3gxdW0OMdT_80GFEYOPFQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"user5\",\r\n    \"email\":\"user5@email.com\",\r\n    \"password\":\"password\",\r\n    \"role\":\"user\",\r\n    \"isActive\":true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/users/create",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"users",
+										"create"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "CreateUser Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"user5\",\r\n    \"email\":\"user5@email.com\",\r\n    \"password\":\"password\",\r\n    \"role\":\"user\",\r\n    \"isActive\":true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/users/create",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"users",
+												"create"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "43"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:28:35 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"2b-2BoCT+BBHGGwO1cHEZJ8ybR2kRs\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::5jzsh-1725424115279-5524c66e7e7c"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Insufficient role permissions\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "DeleteUser",
+					"item": [
+						{
+							"name": "DeleteUser",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNhNjYzYWIzZTBmMzMxMjk0YmQ4NyIsImVtYWlsIjoic3VwZXJ1c2VyQGVtYWlsLmNvbSIsIm5hbWUiOiJTdXBlclVzZXIiLCJyb2xlIjoic3VwZXJ1c2VyIiwiaWF0IjoxNzI1NDI0MTQ1LCJleHAiOjE3MjU0MjQyNjV9.oDNuGpjCS8sf4S60QogFi5N-O-Ey0nGdVmrPX1-cVhs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/api/users/delete/66d3afefb63cffa4b767d778",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"delete",
+										"66d3afefb63cffa4b767d778"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DeleteUser",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/api/users/delete/66d3afefb63cffa4b767d778",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"api",
+												"users",
+												"delete",
+												"66d3afefb63cffa4b767d778"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "265"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:30:20 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"109-3J2v1J0mIe0UeKhWkRS35y/R2UU\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::c9bqb-1725424220367-0d20beaaad70"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"_id\": \"66d3afefb63cffa4b767d778\",\n    \"name\": \"user1\",\n    \"email\": \"user1@email.com\",\n    \"password\": \"$2b$10$zctrNk25eBbXODFhfTNIge/8GYtbHlHcyZ5RTZEx6j3RpFzQYtmOe\",\n    \"role\": \"user\",\n    \"isActive\": true,\n    \"createdAt\": \"2024-09-01T00:06:07.306Z\",\n    \"updatedAt\": \"2024-09-01T00:06:07.306Z\",\n    \"__v\": 0\n}"
+								}
+							]
+						},
+						{
+							"name": "DeleteUser Unauthorized",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/api/users/delete/66d3a663ab3e0f331294bd87",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"delete",
+										"66d3a663ab3e0f331294bd87"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DeleteUser Unauthorized",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/api/users/delete/66d3a663ab3e0f331294bd87",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"api",
+												"users",
+												"delete",
+												"66d3a663ab3e0f331294bd87"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "26"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:30:31 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::q2php-1725424231393-268375061b2d"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthorized\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNjM2YwNThkZGZjNDEzYWQ4MmE1MCIsImVtYWlsIjoidXNlcjJAZW1haWwuY29tIiwibmFtZSI6InVzZXIyIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjQyNjYsImV4cCI6MTcyNTQyNDM4Nn0.cQJrQz8gnKISLQuhjLp6V_MlxhXrvcci_sL0MnMeSv0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/users/profile",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"users",
+										"profile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Profile",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/users/profile",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"users",
+												"profile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "265"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:31:17 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"109-NcctHwQIDCEpbhK0tlO49RNrsDE\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "BYPASS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::lwtvg-1725424277406-36d300189a97"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"_id\": \"66d3c3f058ddfc413ad82a50\",\n    \"name\": \"user2\",\n    \"email\": \"user2@email.com\",\n    \"password\": \"$2b$10$q1lM0qpdwsFG85qdi5dFTO36j58bIQ/Ia4t7hulBfxVf6UYFYNbRy\",\n    \"role\": \"user\",\n    \"isActive\": true,\n    \"createdAt\": \"2024-09-01T01:31:28.468Z\",\n    \"updatedAt\": \"2024-09-01T01:31:28.468Z\",\n    \"__v\": 0\n}"
+								}
+							]
+						},
+						{
+							"name": "Profile Unauthorized",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/users/profile",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"users",
+										"profile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Profile Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/users/profile",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"users",
+												"profile"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Age",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "26"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:31:27 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::8xm6g-1725424287312-d802b83ebebd"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthorized\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Reactions",
+			"item": [
+				{
+					"name": "CreateReaction",
+					"item": [
+						{
+							"name": "CreateReaction Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNjM2YwNThkZGZjNDEzYWQ4MmE1MCIsImVtYWlsIjoidXNlcjJAZW1haWwuY29tIiwibmFtZSI6InVzZXIyIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjQyNjYsImV4cCI6MTcyNTQyNDM4Nn0.cQJrQz8gnKISLQuhjLp6V_MlxhXrvcci_sL0MnMeSv0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\":\"66d3afefb63cffa4b767d778\",\r\n  \"content\":\"Love\",\r\n  \"parentId\":\"66d49dae2b18eb5d45072f84\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/reaction/create",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"reaction",
+										"create"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "CreateReaction Copy",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\":\"66d3afefb63cffa4b767d778\",\r\n  \"content\":\"Love\",\r\n  \"parentId\":\"66d49dae2b18eb5d45072f84\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/reaction/create",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"reaction",
+												"create"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "211"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:31:57 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"d3-cXJ8jRps0eVpO70jQAV8BsNGeHw\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::rlg8q-1725424317577-c7a65b411ea1"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"userId\": \"66d3c3f058ddfc413ad82a50\",\n    \"content\": \"Love\",\n    \"parentId\": \"66d49dae2b18eb5d45072f84\",\n    \"_id\": \"66d7e2bdc6203e9aa66c1283\",\n    \"createdAt\": \"2024-09-04T04:31:57.707Z\",\n    \"updatedAt\": \"2024-09-04T04:31:57.707Z\",\n    \"__v\": 0\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "GetAllReactions",
+					"item": [
+						{
+							"name": "GetAllReactions Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNjM2YwNThkZGZjNDEzYWQ4MmE1MCIsImVtYWlsIjoidXNlcjJAZW1haWwuY29tIiwibmFtZSI6InVzZXIyIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjQyNjYsImV4cCI6MTcyNTQyNDM4Nn0.cQJrQz8gnKISLQuhjLp6V_MlxhXrvcci_sL0MnMeSv0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/reaction/",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"reaction",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetAllReactions Copy",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/reaction/",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"reaction",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "855"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:32:15 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"357-MyoILQk8kffRXzQWE4uJ7EimbNA\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "BYPASS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::mkzsk-1725424335125-b96c8b3095d5"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"_id\": \"66d5498dc45ad9ac3a0a8731\",\n        \"userId\": \"66d3afefb63cffa4b767d778\",\n        \"content\": \"I hate it\",\n        \"parentId\": \"66d49dae2b18eb5d45072f84\",\n        \"createdAt\": \"2024-09-02T05:13:49.396Z\",\n        \"updatedAt\": \"2024-09-02T05:13:49.396Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d54e01370c47063f503d5c\",\n        \"userId\": \"66d3afefb63cffa4b767d778\",\n        \"content\": \"Angry\",\n        \"parentId\": \"66d49dae2b18eb5d45072f84\",\n        \"createdAt\": \"2024-09-02T05:32:49.899Z\",\n        \"updatedAt\": \"2024-09-02T05:32:49.899Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d5edeb4009620dcfbcd1f3\",\n        \"userId\": \"66d3a663ab3e0f331294bd87\",\n        \"content\": \"Love\",\n        \"parentId\": \"66d49dae2b18eb5d45072f84\",\n        \"createdAt\": \"2024-09-02T16:55:07.368Z\",\n        \"updatedAt\": \"2024-09-02T16:55:07.368Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66d7e2bdc6203e9aa66c1283\",\n        \"userId\": \"66d3c3f058ddfc413ad82a50\",\n        \"content\": \"Love\",\n        \"parentId\": \"66d49dae2b18eb5d45072f84\",\n        \"createdAt\": \"2024-09-04T04:31:57.707Z\",\n        \"updatedAt\": \"2024-09-04T04:31:57.707Z\",\n        \"__v\": 0\n    }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "GetReaction",
+					"item": [
+						{
+							"name": "GetReaction Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNjM2YwNThkZGZjNDEzYWQ4MmE1MCIsImVtYWlsIjoidXNlcjJAZW1haWwuY29tIiwibmFtZSI6InVzZXIyIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjQyNjYsImV4cCI6MTcyNTQyNDM4Nn0.cQJrQz8gnKISLQuhjLp6V_MlxhXrvcci_sL0MnMeSv0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/reaction/get/66d54e01370c47063f503d5c",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"reaction",
+										"get",
+										"66d54e01370c47063f503d5c"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetReaction Copy",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/reaction/get/66d54e01370c47063f503d5c",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"reaction",
+												"get",
+												"66d54e01370c47063f503d5c"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "212"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:32:35 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"d4-urZzHKXDEsd/B5ypCKXGsnb+/FE\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "BYPASS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::fgjrn-1725424355247-602d9607273e"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"_id\": \"66d54e01370c47063f503d5c\",\n    \"userId\": \"66d3afefb63cffa4b767d778\",\n    \"content\": \"Angry\",\n    \"parentId\": \"66d49dae2b18eb5d45072f84\",\n    \"createdAt\": \"2024-09-02T05:32:49.899Z\",\n    \"updatedAt\": \"2024-09-02T05:32:49.899Z\",\n    \"__v\": 0\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "DeleteReaction",
+					"item": [
+						{
+							"name": "DeleteReaction Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDNjM2YwNThkZGZjNDEzYWQ4MmE1MCIsImVtYWlsIjoidXNlcjJAZW1haWwuY29tIiwibmFtZSI6InVzZXIyIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjU0MjQyNjYsImV4cCI6MTcyNTQyNDM4Nn0.cQJrQz8gnKISLQuhjLp6V_MlxhXrvcci_sL0MnMeSv0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://taller-node.vercel.app/apI/reaction/delete/66d54e01370c47063f503d5c",
+									"protocol": "https",
+									"host": [
+										"taller-node",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"apI",
+										"reaction",
+										"delete",
+										"66d54e01370c47063f503d5c"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DeleteReaction Copy",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://taller-node.vercel.app/apI/reaction/delete/66d54e01370c47063f503d5c",
+											"protocol": "https",
+											"host": [
+												"taller-node",
+												"vercel",
+												"app"
+											],
+											"path": [
+												"apI",
+												"reaction",
+												"delete",
+												"66d54e01370c47063f503d5c"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Content-Length",
+											"value": "35"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Sep 2024 04:32:59 GMT"
+										},
+										{
+											"key": "Etag",
+											"value": "W/\"23-24cxAwoPLQOa4D7Z9iflZxbv0K4\""
+										},
+										{
+											"key": "Server",
+											"value": "Vercel"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=63072000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "X-Vercel-Cache",
+											"value": "MISS"
+										},
+										{
+											"key": "X-Vercel-Id",
+											"value": "iad1::iad1::xk8sr-1725424379594-fc05c36ed4b4"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Reaction is not yours\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Test Server",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://taller-node.vercel.app/",
+					"protocol": "https",
+					"host": [
+						"taller-node",
+						"vercel",
+						"app"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Test Server",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://taller-node.vercel.app/",
+							"protocol": "https",
+							"host": [
+								"taller-node",
+								"vercel",
+								"app"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Age",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "public, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Content-Length",
+							"value": "11"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 04 Sep 2024 04:33:09 GMT"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"b-Ck1VqNd45QIvq3AZd8XYQLvEhtA\""
+						},
+						{
+							"key": "Server",
+							"value": "Vercel"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=63072000; includeSubDomains; preload"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "X-Vercel-Cache",
+							"value": "MISS"
+						},
+						{
+							"key": "X-Vercel-Id",
+							"value": "iad1::iad1::26xlz-1725424389392-ed1c661cc10a"
+						}
+					],
+					"cookie": [],
+					"body": "Hello World"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "authToken",
+			"value": "authToken"
+		}
+	]
+}
