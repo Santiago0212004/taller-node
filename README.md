@@ -7,8 +7,8 @@
 1. Estando en la carpeta del proybecto se ejecuta el comando ```yarn install```. Esto instalará las siguientes librerías:
     ![image](https://github.com/user-attachments/assets/61d6a754-1c8c-4361-9c15-4bde5c6f7402)
 
-  Y creará los siguientes scripts:
-    ![image](https://github.com/user-attachments/assets/f585d659-d1cb-497b-be08-9117c1984a95)
+      Y creará los siguientes scripts:
+           ![image](https://github.com/user-attachments/assets/f585d659-d1cb-497b-be08-9117c1984a95)
 
 
 2. Luego, si se ejecuta ```yarn start``` ejecutará en local el proyecto en un ambiente de desarrollo.
