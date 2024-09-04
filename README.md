@@ -6,11 +6,11 @@
 
 1. Estando en la carpeta del proybecto se ejecuta el comando ```yarn install```. Esto instalará las siguientes librerías:
 
-  ![image](https://github.com/user-attachments/assets/61d6a754-1c8c-4361-9c15-4bde5c6f7402)
+    ![image](https://github.com/user-attachments/assets/61d6a754-1c8c-4361-9c15-4bde5c6f7402)
 
   Y creará los siguientes scripts:
 
-  ![image](https://github.com/user-attachments/assets/f585d659-d1cb-497b-be08-9117c1984a95)
+    ![image](https://github.com/user-attachments/assets/f585d659-d1cb-497b-be08-9117c1984a95)
 
 
 2. Luego, si se ejecuta ```yarn start``` ejecutará en local el proyecto en un ambiente de desarrollo.
@@ -21,7 +21,7 @@
 
 1. Se definió el siguiente archivo vercel.json:
 
-  ![image](https://github.com/user-attachments/assets/65a4f3ee-949d-40eb-a77a-28adcc5659fb)
+    ![image](https://github.com/user-attachments/assets/65a4f3ee-949d-40eb-a77a-28adcc5659fb)
 
   Con esa información, vercel reconocerá los archivos con código de JavasCript dentro de la carpeta "dist" (después del build), usando @vercel/node para realizar el build en la nube.
 
