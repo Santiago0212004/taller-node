@@ -105,8 +105,8 @@ class CommentController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const parentId = req.params.commentId;
-                const userId_ = req.params.id;
-                const comment = yield comment_service_1.default.create(Object.assign(Object.assign({}, req.body), { parentId }).userId = userId_);
+                req.body.userId = req.params.id;
+                const comment = yield comment_service_1.default.create(Object.assign(Object.assign({}, req.body), { parentId }));
                 res.status(201).json(comment);
             }
             catch (error) {

@@ -84,8 +84,8 @@ class CommentController {
     public async reply(req: Request, res: Response) {
         try {
             const parentId = req.params.commentId;
-            const userId_:any = req.params.id;
-            const comment: CommentDocument = await commentService.create(({ ...req.body, parentId } as CommentInput).userId = userId_);
+            req.body.userId = req.params.id;
+            const comment: CommentDocument = await commentService.create({ ...req.body, parentId } as CommentInput);
             res.status(201).json(comment);
         } catch (error) {
             res.status(500).json(error);
