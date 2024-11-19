@@ -1,5 +1,3 @@
-// src/graphql/resolvers/user.resolvers.ts
-
 import { AuthenticationError, ForbiddenError } from 'apollo-server-express';
 import { Context } from '../../graphql/types/context';
 import UserService from '../../services/user.service';
