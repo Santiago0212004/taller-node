@@ -2,6 +2,8 @@ import express, { Express } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { userTypeDefs } from './graphql/types/user.types';
 import { userResolvers } from './graphql/resolvers/user.resolvers';
+import { reactionTypeDefs } from './graphql/types/reactions.types';
+import { reactionResolvers } from './graphql/resolvers/reactions.resolvers';
 import dotenv from 'dotenv';
 import { db } from './config/db';
 import jwt from 'jsonwebtoken';
@@ -18,16 +20,15 @@ async function startServer() {
   app.use(express.urlencoded({ extended: true }));
 
   // GraphQL Server Setup
+  
   const server = new ApolloServer({
-    typeDefs: userTypeDefs,
-    resolvers: userResolvers,
+    typeDefs: [userTypeDefs, reactionTypeDefs],
+    resolvers: [userResolvers, reactionResolvers],
     context: ({ req }) => {
       const token = req.headers.authorization || '';
-      
       if (!token) {
         return { user: null };
       }
-
       try {
         const user = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET || 'secret');
         return { user };
@@ -36,6 +37,7 @@ async function startServer() {
       }
     },
   });
+  
 
   await server.start();
   
