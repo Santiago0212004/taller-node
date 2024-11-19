@@ -54,6 +54,7 @@ export const userResolvers = {
         throw new ForbiddenError('Not authorized');
       }
       try {
+        input.isActive = true;
         return await UserService.create(input);
       } catch (error) {
         if (error instanceof UserExistsError) {

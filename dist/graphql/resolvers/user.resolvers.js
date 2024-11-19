@@ -66,6 +66,7 @@ exports.userResolvers = {
                 throw new apollo_server_express_1.ForbiddenError('Not authorized');
             }
             try {
+                input.isActive = true;
                 return yield user_service_1.default.create(input);
             }
             catch (error) {
