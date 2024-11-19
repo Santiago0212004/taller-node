@@ -16,6 +16,8 @@ const express_1 = __importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
 const user_types_1 = require("./graphql/types/user.types");
 const user_resolvers_1 = require("./graphql/resolvers/user.resolvers");
+const reactions_types_1 = require("./graphql/types/reactions.types");
+const reactions_resolvers_1 = require("./graphql/resolvers/reactions.resolvers");
 const dotenv_1 = __importDefault(require("dotenv"));
 const db_1 = require("./config/db");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -30,8 +32,8 @@ function startServer() {
         app.use(express_1.default.urlencoded({ extended: true }));
         // GraphQL Server Setup
         const server = new apollo_server_express_1.ApolloServer({
-            typeDefs: user_types_1.userTypeDefs,
-            resolvers: user_resolvers_1.userResolvers,
+            typeDefs: [user_types_1.userTypeDefs, reactions_types_1.reactionTypeDefs],
+            resolvers: [user_resolvers_1.userResolvers, reactions_resolvers_1.reactionResolvers],
             context: ({ req }) => {
                 const token = req.headers.authorization || '';
                 if (!token) {
