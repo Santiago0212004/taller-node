@@ -9,6 +9,8 @@ import { db } from './config/db';
 import jwt from 'jsonwebtoken';
 import { router as comment } from './routes/comment.routes';
 import { router as reaction } from './routes/reaction.routes';
+import { commentTypeDefs } from './graphql/types/comments.types';
+import { commentResolvers } from './graphql/resolvers/comments.resolvers';
 
 dotenv.config();
 
@@ -22,8 +24,8 @@ async function startServer() {
   // GraphQL Server Setup
   
   const server = new ApolloServer({
-    typeDefs: [userTypeDefs, reactionTypeDefs],
-    resolvers: [userResolvers, reactionResolvers],
+    typeDefs: [userTypeDefs, reactionTypeDefs, commentTypeDefs],
+    resolvers: [userResolvers, reactionResolvers, commentResolvers],
     context: ({ req }) => {
       const token = req.headers.authorization || '';
       if (!token) {
