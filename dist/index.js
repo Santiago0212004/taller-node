@@ -23,6 +23,8 @@ const db_1 = require("./config/db");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const comment_routes_1 = require("./routes/comment.routes");
 const reaction_routes_1 = require("./routes/reaction.routes");
+const comments_types_1 = require("./graphql/types/comments.types");
+const comments_resolvers_1 = require("./graphql/resolvers/comments.resolvers");
 dotenv_1.default.config();
 function startServer() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -32,8 +34,8 @@ function startServer() {
         app.use(express_1.default.urlencoded({ extended: true }));
         // GraphQL Server Setup
         const server = new apollo_server_express_1.ApolloServer({
-            typeDefs: [user_types_1.userTypeDefs, reactions_types_1.reactionTypeDefs],
-            resolvers: [user_resolvers_1.userResolvers, reactions_resolvers_1.reactionResolvers],
+            typeDefs: [user_types_1.userTypeDefs, reactions_types_1.reactionTypeDefs, comments_types_1.commentTypeDefs],
+            resolvers: [user_resolvers_1.userResolvers, reactions_resolvers_1.reactionResolvers, comments_resolvers_1.commentResolvers],
             context: ({ req }) => {
                 const token = req.headers.authorization || '';
                 if (!token) {
