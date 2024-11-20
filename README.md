@@ -116,6 +116,180 @@ Para eliminar un comentario, concatenar al enlace inicial "api/reaction/delete/i
 Únicamente puede eliminar la reacción el autor del mismo.
 
 
+## GraphQL Endpoints
+Estos son cada uno de los servicios disponibles para esta API usando el lenguaje de GraphQL. Todas las solicitudes a realizar se harán a través de este enlace ["https://taller-node.vercel.app/"](https://taller-node.vercel.app/)
+junto con la Query o Mutation a usar.
+
+### Usuarios
+Para usuarios estos van a ser los tipos de datos e "inputs" que va a tener de esta entidad:
+  
+```graphql
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  role: String!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+input UserInput {
+  name: String!
+  email: String!
+  password: String!
+  role: String = "user"
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+```
+#### - Login:
+Para iniciar sesión con un usuario existente consumir el servicio tipo Query ```login(input: LoginInput!): AuthPayload!``` el cual recibe un LoginInput y retorna un JSON de tipo AuthPayload donde viene el token generado por el sistema. 
+Este es el único tipo de solicitud que no requiere enviar un token, para el resto de solicitudes enviar el token recibido al iniciar sesión.
+Formato de entrada usando Apollo GraphQL:
+```
+{
+  "input": {
+    "email": "email",
+    "password": "password"
+  }
+}
+```
+
+#### - Crear usuario:
+Para crear un usuario consumir el servicio tipo Mutation ```register(input: UserInput!): User!``` el cual recibe un "input" tipo UserInput y retorna un JSON de tipo User.
+Formato de entrada usando Apollo GraphQL:
+```
+{
+  "input": {
+    "name": "name",
+    "email": "email",
+    "password": "password",
+    "role": "superuser | user"
+  }
+}
+```
+#### - Modificar usuario:
+Para modificar un usuario consumir el servicio tipo Mutation ```updateUser(id: ID!, input: UserInput!): User!``` el cual recibe un "input" tipo UserInput e "id" de usuario y retorna un JSON de tipo User.
+
+#### - Ver todos los usuarios:
+Para obtener el listado de todos los usuarios existentes consumir el servicio tipo Query ```users: [User!]!``` el cual retorna un listado de usuarios existentes.
+
+#### - Eliminar usuario:
+Para eliminar un usuario consumir el servicio tipo Mutation ```deleteUser(id: ID!): User!``` el cual recibe un "id" del usuario a eliminar y retorna un JSON de tipo User con el usuario eliminado.
+
+#### - Ver usuario específico
+Para obtener un usuario específico consumir el servicio tipo Query ```user(id: ID!): User``` el cual retorna un JSON del usuario a buscar.
+
+#### - Mi usuario:
+Para obtener la información del usuario actual consumir el servicio tipo Query ```me: User``` el cual retorna la información del  usuario.
+
+
+### Comentarios
+Para comentarios, estos van a ser los tipos de datos e "inputs" que va a tener de esta entidad:
+  
+```graphql
+input CommentInput{
+    content: String!
+    parentId: ID
+}
+
+input UpdateComment{
+    id: ID!
+    content: String!
+    parentId: ID
+}
+
+type Comment{
+    id:ID!
+    userId: ID!
+    content: String!
+    parentId: ID
+    createdAt: String!
+    updatedAt: String!
+}
+```
+
+#### - Crear un comentario
+Para crear un comentario consumir el servicio tipo Mutation ```createComment(input:CommentInput):Comment``` el cual recibe un "input" tipo CommentInput y retorna un JSON de tipo Comment.
+Formato de entrada usando Apollo GraphQL:
+```
+{
+  "input": {
+  "content":"comment",
+  "parentId:"parent comment id" #No es obligatrio
+  }
+}
+```
+#### - Modificar un comentario
+Para modificar un comentario consumir el servicio tipo Mutation ```updateComment(input:UpdateComment): Comment``` el cual recibe un "input" tipo UpdateComment y retorna un JSON de tipo Comment.
+Formato de entrada usando Apollo GraphQL:
+```
+{
+  "input": {
+    "id": "Id"
+    content: "comment"
+    parentId: "parent comment id" #No es obligatrio
+  }
+}
+```
+
+#### - Obtener comentario
+Para obtener un comentario específico consumir el servicio tipo Query ```getComment(id: ID!): Comment``` el cual retorna un JSON del comentario a buscar.
+
+#### - Obtener todos los comentarios
+Para obtener el listado de todos los comentarios existentes consumir el servicio tipo Query ```getComments:[Comment]``` el cual retorna un listado de todos los comentarios.
+
+#### - Eliminar un comentario
+Para eliminar un comentario consumir el servicio tipo Mutation ```deleteComment(id: ID!):Comment``` el cual recibe un "id" del comentario a eliminar y retorna un JSON de tipo Comment con el comentario eliminado.
+
+### Reacciones de Comentarios
+Para reacciones, estos van a ser los tipos de datos e "inputs" que va a tener de esta entidad:
+  
+```graphql
+  type Reaction {
+    id: ID!
+    userId: ID!
+    content: String!
+    parentId: ID
+    createdAt: String!
+    updatedAt: String!
+  }
+
+  input ReactionInput {
+    userId: ID!
+    content: String!
+    parentId: ID
+  }
+```
+#### - Crear una reacción
+Para crear una reacción a un comentario, consumir el servicio tipo Mutation ```createReaction(input: ReactionInput!): Reaction!``` el cual recibe un "input" tipo ReactionInput y retorna un JSON de tipo Reaction.
+Formato de entrada usando Apollo GraphQL:
+```
+{
+  "input": {
+    "userId": "userId"
+    "content": "reaction"
+    parentId: "comment id"
+  }
+}
+```
+#### - Obtener una reacción
+Para obtener una reacción específica, consumir el servicio tipo Query ```getReaction(reactionId: ID!): Reaction``` el cual recibe la "id" de la reacción retorna un JSON de la reacción a buscar.
+
+#### - Obtener todos los comentarios
+Para obtener el listado de todos las reacción existentes consumir el servicio tipo Query ```getReactions: [Reaction!]``` el cual retorna un listado de todas las reacciones.
+
+#### - Eliminar un comentario
+Para eliminar una reacción, consumir el servicio tipo Mutation ```deleteReaction(reactionId: ID!): Reaction``` el cual recibe un "id" de la reacción a eliminar y retorna un JSON de tipo Reaction con la reacción eliminada.
+
+
+
 
 
 
